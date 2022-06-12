@@ -51,8 +51,8 @@ public class Main {
             if(update.hasMessage() && update.getMessage().hasText()){
                 Long chatId = update.getMessage().getChatId();
                 if(update.getMessage().getText().equals("/start")){
-                    SendMsg("Установи время работы и время отдыха и кол-во повторений" +
-                            " через пробел в минутах ", chatId.toString());
+                    SendMsg("РЈСЃС‚Р°РЅРѕРІРё РІСЂРµРјСЏ СЂР°Р±РѕС‚С‹ Рё РІСЂРµРјСЏ РѕС‚РґС‹С…Р° Рё РєРѕР»-РІРѕ РїРѕРІС‚РѕСЂРµРЅРёР№" +
+                            " С‡РµСЂРµР· РїСЂРѕР±РµР» РІ РјРёРЅСѓС‚Р°С… ", chatId.toString());
                 }else{
                     var args = update.getMessage().getText().split(" ");
                     int index = Integer.parseInt(args[2])-1;
@@ -62,7 +62,7 @@ public class Main {
 
                         userTimers.put(new Timer(workTime, TimerType.WORK, index, iterationSize), chatId);
 
-                        SendMsg("Давай работай", chatId.toString());
+                        SendMsg("Р”Р°РІР°Р№ СЂР°Р±РѕС‚Р°Р№", chatId.toString());
                         if (args.length >= 2){
                             var breakTime = workTime.plus(Long.parseLong(args[1]), ChronoUnit.MINUTES);
 
@@ -82,7 +82,7 @@ public class Main {
                         userTimers.remove(timer);
                         switch (timer.timerType){
                             case WORK -> {
-                                SendMsg("Пора отдыхать", userId.toString());
+                                SendMsg("РџРѕСЂР° РѕС‚РґС‹С…Р°С‚СЊ", userId.toString());
                                 if(timer.index != 0){
                                     int index = timer.index-1;
                                     userTimers.put(new Timer(Instant.now().plus(timer.iterationSize, ChronoUnit.MINUTES),
@@ -91,10 +91,10 @@ public class Main {
                             }
                             case BREAK -> {
                                 if(timer.index==0){
-                                    SendMsg("Таймер завершил работу", userId.toString());
+                                    SendMsg("РўР°Р№РјРµСЂ Р·Р°РІРµСЂС€РёР» СЂР°Р±РѕС‚Сѓ", userId.toString());
                                 }else{
                                     int index = timer.index-1;
-                                    SendMsg("Пора работать", userId.toString());
+                                    SendMsg("РџРѕСЂР° СЂР°Р±РѕС‚Р°С‚СЊ", userId.toString());
                                     userTimers.put(new Timer(Instant.now().plus(timer.iterationSize, ChronoUnit.MINUTES),
                                             TimerType.BREAK, index, timer.iterationSize), userId);
                                 }
@@ -135,11 +135,11 @@ public class Main {
             int userCount = 0;
             if(update.hasMessage() && update.getMessage().hasText()){
                 if(update.getMessage().getText().equals("/start")){
-                    System.out.println("Новый пользователь" + ++userCount);
+                    System.out.println("РќРѕРІС‹Р№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ" + ++userCount);
                     SendMsg("Hello",
                             update.getMessage().getChatId().toString());
                 }else{
-                    System.out.println("Обработка сообщений");
+                    System.out.println("РћР±СЂР°Р±РѕС‚РєР° СЃРѕРѕР±С‰РµРЅРёР№");
                     SendMsg(update.getMessage().getText(),
                             update.getMessage().getChatId().toString());
                 }
